@@ -9,60 +9,82 @@ class DialogPage extends StatefulWidget {
 }
 
 class _DialogPageState extends State<DialogPage> {
-  TextEditingController _sendMessageController = new TextEditingController();
+  TextEditingController _sendMessageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: getBottom(),
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 stops: [0.3, 0.7],
                 colors: [Color(0xccE97EA6), Color(0xccB0EADA)])),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 70.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      getMessage('message 1', isRightMessage: true),
+                      getMessage('message 2', isRightMessage: false),
+                      getMessage('message 3', isRightMessage: true),
+                      getMessage('message 4', isRightMessage: true),
+                      getMessage('message 5', isRightMessage: true),
+                      getMessage('message 6', isRightMessage: true),
+                      getMessage('message 7', isRightMessage: true),
+                    ],
+                  ),
+                ),
+              ),
+              getBottom(),
+            ],
+          ),
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: FlatButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.close,
-              color: Colors.white,
-              size: 40,
-            )),
+        leading: TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.close,
+            color: Colors.white,
+            size: 40,
+          ),
+        ),
         title: Row(
           children: <Widget>[
             Container(
               width: 40,
               height: 40,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image: NetworkImage(
                           "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"),
                       fit: BoxFit.cover)),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+                const Text(
                   "Tyler Nix",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white
-                    ),
+                      color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
                 Text(
@@ -74,62 +96,69 @@ class _DialogPageState extends State<DialogPage> {
             )
           ],
         ),
-        actions: <Widget>[],
       ),
     );
   }
-  Widget getBottom(){
-    return Container(
-      height: 80,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.2)
+
+  Widget getMessage(String message, {required bool isRightMessage}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment:
+            isRightMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.black,
+            child: Text(
+                message,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+    );
+  }
+
+  Widget getBottom() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        // width: double.infinity,
+        decoration: BoxDecoration(
+          color: const Color(0xFFE3FDF8),
+          borderRadius: BorderRadius.circular(100),
+        ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              width: (MediaQuery.of(context).size.width - 40)/2,
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.add,size: 35,color: Color(0xccE97EA6),),
-                  SizedBox(width: 15,),
-                ],
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(
+                Icons.add,
+                size: 35,
+                color: Color(0x99e22678),
               ),
             ),
-            Container(
-              width: (MediaQuery.of(context).size.width- 40)/2,
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: (MediaQuery.of(context).size.width- 140)/2,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: TextField(
-                        cursorColor: Colors.black,
-                        controller: _sendMessageController,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Aa",
-                            suffixIcon: Icon(Icons.keyboard_voice, size: 35,color: Color(0xccE97EA6),)
-
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            Expanded(
+              child: TextField(
+                cursorColor: Colors.black,
+                controller: _sendMessageController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Write a message...",
+                ),
               ),
             ),
-
-
-
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(
+                Icons.keyboard_voice,
+                size: 30,
+                color: Color(0x99e22678),
+              ),
+            ),
           ],
         ),
       ),
