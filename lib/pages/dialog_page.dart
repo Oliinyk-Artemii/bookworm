@@ -23,20 +23,30 @@ class _DialogPageState extends State<DialogPage> {
                 stops: [0.3, 0.7],
                 colors: [Color(0xccE97EA6), Color(0xccB0EADA)])),
         child: Padding(
-          padding: const EdgeInsets.only(top: 70.0),
+          padding: const EdgeInsets.only(top: 110.0),
           child: Column(
             children: [
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      getMessage('message 1', isRightMessage: true),
-                      getMessage('message 2', isRightMessage: false),
-                      getMessage('message 3', isRightMessage: true),
-                      getMessage('message 4', isRightMessage: true),
-                      getMessage('message 5', isRightMessage: true),
-                      getMessage('message 6', isRightMessage: true),
-                      getMessage('message 7', isRightMessage: true),
+                      getMessage(
+                          'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                          isRightMessage: false),
+                      getMessage('Lorem ipsum dolor sit amet',
+                          isRightMessage: true),
+                      getMessage('Lorem ipsum dolor sit amet',
+                          isRightMessage: false),
+                      getMessage(
+                          'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                          isRightMessage: true),
+                      getMessage('Lorem ipsum dolor sit amet, nonummy euismod',
+                          isRightMessage: false),
+                      getMessage('Lorem ipsum dolor sit amet',
+                          isRightMessage: true),
+                      getMessage(
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                          isRightMessage: false),
                     ],
                   ),
                 ),
@@ -91,9 +101,9 @@ class _DialogPageState extends State<DialogPage> {
                   "Active now",
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.4), fontSize: 14),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -102,18 +112,27 @@ class _DialogPageState extends State<DialogPage> {
 
   Widget getMessage(String message, {required bool isRightMessage}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
       child: Row(
         mainAxisAlignment:
             isRightMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           Container(
-            width: 100,
-            height: 100,
-            color: Colors.black,
-            child: Text(
-                message,
-              style: TextStyle(color: Colors.white),
+            decoration: BoxDecoration(
+              color: isRightMessage ? Color(0xFFB57B94): Color(0xFF794E72),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width / 1.5,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  message,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ),
         ],
