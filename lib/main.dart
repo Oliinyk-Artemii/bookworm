@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/home_page.dart';
+import 'package:untitled/project_router.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      initialRoute: Routes.nickname.name,
+      onGenerateRoute: ProjectRouter.generateRoute,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
