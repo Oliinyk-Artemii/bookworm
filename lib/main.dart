@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled/cubits/messager/messager_cubit.dart';
+import 'package:untitled/cubits/user/user_cubit.dart';
 import 'package:untitled/project_router.dart';
+import 'package:untitled/utils/di_utils.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  DIUtils.injectDependencies();
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: BookwarmApp(),
@@ -14,13 +28,23 @@ class BookwarmApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiBlocProvider(
+      providers: <BlocProvider>[
+        BlocProvider<UserCubit>(
+          create: (context) => DIUtils.get<UserCubit>(),
+        ),
+        BlocProvider<MessagerCubit>(
+          create: (context) => DIUtils.get<MessagerCubit>(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: Routes.dialog.name,
+        onGenerateRoute: ProjectRouter.generateRoute,
       ),
-      initialRoute: Routes.dialog.name,
-      onGenerateRoute: ProjectRouter.generateRoute,
     );
   }
 }
