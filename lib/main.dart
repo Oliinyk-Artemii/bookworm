@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/home_page.dart';
+import 'package:untitled/pages/dialog_page.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: HomePage(),
+    home: DialogPage(),
   ));
 }
 
