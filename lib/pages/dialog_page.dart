@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/utils/values/gen/assets.gen.dart';
+import 'package:untitled/utils/values/gen/fonts.gen.dart';
 
 class DialogPage extends StatefulWidget {
   const DialogPage({Key? key}) : super(key: key);
@@ -9,73 +11,224 @@ class DialogPage extends StatefulWidget {
 }
 
 class _DialogPageState extends State<DialogPage> {
-  TextEditingController _sendMessageController = new TextEditingController();
+  TextEditingController _sendMessageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.3, 0.7],
-                colors: [Color(0xccE97EA6), Color(0xccB0EADA)])),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: FlatButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.close,
-              color: Colors.white,
-              size: 40,
-            )),
-        title: Row(
-          children: <Widget>[
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"),
-                      fit: BoxFit.cover)),
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Tyler Nix",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white
+    return Container(
+      color: Colors.white,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [
+              0,
+              0.35,
+              0.64,
+              0.82,
+              1,
+            ],
+            colors: [
+              Color(0x99F51C6D),
+              Color(0x99DB739B),
+              Color(0x99A8B3B8),
+              Color(0x9991DACB),
+              Color(0x998BF1D4),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            resizeToAvoidBottomInset: true,
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Assets.images.icons.close.svg(),
+              ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 2.0),
+                    child: Text(
+                      "BOOKWORM",
+                      style: TextStyle(
+                        letterSpacing: 2,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                        fontFamily: FontFamily.montserrat,
+                      ),
                     ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 6.0),
+                        child: Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0xFF8BE11C)),
+                        ),
+                      ),
+                      const Text(
+                        "Online",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontFamily: FontFamily.montserrat,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Assets.images.icons.bot.svg(),
                 ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                  "Active now",
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.4), fontSize: 14),
-                )
               ],
-            )
+            ),
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    reverse: true,
+                    child: Column(
+                      children: [
+                        SizedBox(height: AppBar().preferredSize.height),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            isRightMessage: false),
+                        getMessage('Lorem ipsum dolor sit amet',
+                            isRightMessage: true),
+                        getMessage('Lorem ipsum dolor sit amet',
+                            isRightMessage: false),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        getMessage(
+                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
+                            isRightMessage: true),
+                        const SizedBox(
+                          height: 50,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: getBottom(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget getMessage(String message, {required bool isRightMessage}) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 20, left: 20, bottom: 10),
+      child: Row(
+        mainAxisAlignment:
+            isRightMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: isRightMessage ? Color(0xFFB57B94) : Color(0xFF794E72),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: MediaQuery.of(context).size.width / 1.5,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  message,
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getBottom() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        // width: double.infinity,
+        decoration: BoxDecoration(
+          color: const Color(0xFFE3FDF8),
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(
+                Icons.add,
+                size: 35,
+                color: Color(0x99e22678),
+              ),
+            ),
+            Expanded(
+              child: TextField(
+                cursorColor: Colors.black,
+                controller: _sendMessageController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Write a message...",
+                ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(
+                Icons.keyboard_voice,
+                size: 30,
+                color: Color(0x99e22678),
+              ),
+            ),
           ],
         ),
-        actions: <Widget>[
-
-        ],
       ),
     );
   }
