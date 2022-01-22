@@ -14,6 +14,7 @@ class _DialogPageState extends State<DialogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomSheet: getBottom(),
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
@@ -73,9 +74,64 @@ class _DialogPageState extends State<DialogPage> {
             )
           ],
         ),
-        actions: <Widget>[
+        actions: <Widget>[],
+      ),
+    );
+  }
+  Widget getBottom(){
+    return Container(
+      height: 80,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.2)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: (MediaQuery.of(context).size.width - 40)/2,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.add,size: 35,color: Color(0xccE97EA6),),
+                  SizedBox(width: 15,),
+                ],
+              ),
+            ),
+            Container(
+              width: (MediaQuery.of(context).size.width- 40)/2,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: (MediaQuery.of(context).size.width- 140)/2,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: TextField(
+                        cursorColor: Colors.black,
+                        controller: _sendMessageController,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Aa",
+                            suffixIcon: Icon(Icons.keyboard_voice, size: 35,color: Color(0xccE97EA6),)
 
-        ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+
+
+          ],
+        ),
       ),
     );
   }
