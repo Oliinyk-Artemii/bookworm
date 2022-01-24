@@ -26,7 +26,7 @@ class DIUtils {
   }
 
   static void _injectGlobalBlocs() {
-    _getIt.registerSingleton<UserCubit>(UserCubit());
     _getIt.registerSingleton<MessagerCubit>(MessagerCubit());
+    _getIt.registerSingleton<UserCubit>(UserCubit());
   }
 }

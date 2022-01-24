@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/project_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled/cubits/messager/messager_cubit.dart';
+import 'package:untitled/cubits/messager/messager_state.dart';
+import 'package:untitled/cubits/user/user_cubit.dart';
+import 'package:untitled/utils/di_utils.dart';
 import 'package:untitled/utils/values/gen/assets.gen.dart';
 import 'package:untitled/utils/values/gen/fonts.gen.dart';
+import 'package:untitled/project_router.dart';
 
 class DialogPage extends StatefulWidget {
   const DialogPage({Key? key}) : super(key: key);
@@ -13,6 +18,19 @@ class DialogPage extends StatefulWidget {
 
 class _DialogPageState extends State<DialogPage> {
   TextEditingController _sendMessageController = TextEditingController();
+  late UserCubit _userCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _userCubit = DIUtils.get<UserCubit>();
+  }
+
+  @override
+  void dispose() {
+    _userCubit.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,123 +57,105 @@ class _DialogPageState extends State<DialogPage> {
             ],
           ),
         ),
-        child: SafeArea(
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            resizeToAvoidBottomInset: true,
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              centerTitle: true,
+        child: BlocBuilder<MessagerCubit, MessagerState>(
+            builder: (context, MessagerState state) {
+          return SafeArea(
+            child: Scaffold(
               backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Assets.images.icons.close.svg(),
-              ),
-              title: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 2.0),
-                    child: Text(
-                      "BOOKWORM",
-                      style: TextStyle(
-                        letterSpacing: 2,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontFamily: FontFamily.montserrat,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6.0),
-                        child: Container(
-                          width: 10,
-                          height: 10,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Color(0xFF8BE11C)),
-                        ),
-                      ),
-                      const Text(
-                        "Online",
+              resizeToAvoidBottomInset: true,
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Assets.images.icons.close.svg(),
+                ),
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 2.0),
+                      child: Text(
+                        "BOOKWORM",
                         style: TextStyle(
+                          letterSpacing: 2,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
                           color: Colors.white,
-                          fontSize: 11,
                           fontFamily: FontFamily.montserrat,
                         ),
                       ),
-                    ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF8BE11C)),
+                          ),
+                        ),
+                        const Text(
+                          "Online",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontFamily: FontFamily.montserrat,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Assets.images.icons.bot.svg(),
                   ),
                 ],
               ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: Assets.images.icons.bot.svg(),
-                ),
-              ],
-            ),
-            body: Stack(
-              children: [
-                SizedBox(
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    reverse: true,
-                    child: Column(
-                      children: [
-                        SizedBox(height: AppBar().preferredSize.height),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            isRightMessage: false),
-                        getMessage('Lorem ipsum dolor sit amet',
-                            isRightMessage: true),
-                        getMessage('Lorem ipsum dolor sit amet',
-                            isRightMessage: false),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        getMessage(
-                            'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                            isRightMessage: true),
-                        const SizedBox(
-                          height: 50,
-                        )
-                      ],
+              body: Stack(
+                children: [
+                  SizedBox(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      reverse: true,
+                      child: Column(
+                        children: [
+                          SizedBox(height: AppBar().preferredSize.height),
+                          ...state.messages.map((message) => getMessage(
+                                message.message,
+                                isRightMessage:
+                                    message.user == _userCubit.state.username,
+                              )),
+                          Container(),
+                          const SizedBox(
+                            height: 50,
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: getBottom(),
-                ),
-              ],
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: getBottom(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

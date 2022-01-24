@@ -9,6 +9,8 @@ import 'package:untitled/utils/di_utils.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  Firebase.initializeApp();
+
   DIUtils.injectDependencies();
 
   await SystemChrome.setPreferredOrientations([
@@ -42,7 +44,7 @@ class BookwarmApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: Routes.chips.name,
+        initialRoute: Routes.base.name,
         onGenerateRoute: ProjectRouter.generateRoute,
       ),
     );
