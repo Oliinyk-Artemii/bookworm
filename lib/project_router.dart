@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/chips_page.dart';
 import 'package:untitled/pages/dialog_page.dart';
 import 'package:untitled/pages/nickname_page.dart';
+import 'package:untitled/pages/username_page.dart';
 
+const _base = '/';
 const _dialog = '/dialog';
 const _nickname = '/nickname';
+const _chips = '/chips';
 
 class ProjectRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,7 +16,10 @@ class ProjectRouter {
         return _buildRoute(const NicknamePage());
       case _dialog:
         return _buildRoute(const DialogPage());
-
+      case _base:
+        return _buildRoute(const UsernamePage());
+      case _chips:
+        return _buildRoute(const ChipsPage());
       default:
         return _buildRoute(
           Scaffold(
@@ -29,7 +36,7 @@ class ProjectRouter {
   }
 }
 
-enum Routes { nickname, dialog, splash }
+enum Routes { nickname, dialog, splash, chips, base }
 
 extension RoutNames on Routes {
   String get name {
@@ -40,6 +47,10 @@ extension RoutNames on Routes {
         return _dialog;
       case Routes.splash:
         return '';
+      case Routes.base:
+        return _base;
+      case Routes.chips:
+        return _chips;
     }
   }
 

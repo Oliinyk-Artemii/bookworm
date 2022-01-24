@@ -1,5 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled/cubits/messager/messager_cubit.dart';
+import 'package:untitled/cubits/messager/messager_state.dart';
+import 'package:untitled/cubits/user/user_cubit.dart';
+import 'package:untitled/cubits/user/user_state.dart';
+import 'package:untitled/utils/di_utils.dart';
+import 'package:untitled/utils/values/gen/assets.gen.dart';
+import 'package:untitled/utils/values/gen/fonts.gen.dart';
+import 'package:untitled/project_router.dart';
 
 class DialogPage extends StatefulWidget {
   const DialogPage({Key? key}) : super(key: key);
@@ -10,102 +19,149 @@ class DialogPage extends StatefulWidget {
 
 class _DialogPageState extends State<DialogPage> {
   TextEditingController _sendMessageController = TextEditingController();
+  late UserCubit userCubit;
+  late MessagerCubit messagerCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    userCubit = DIUtils.get<UserCubit>();
+    messagerCubit = DIUtils.get<MessagerCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      body: Container(
+    return Container(
+      color: Colors.white,
+      child: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                stops: [0.3, 0.7],
-                colors: [Color(0xccE97EA6), Color(0xccB0EADA)])),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 110.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      getMessage(
-                          'Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                          isRightMessage: false),
-                      getMessage('Lorem ipsum dolor sit amet',
-                          isRightMessage: true),
-                      getMessage('Lorem ipsum dolor sit amet',
-                          isRightMessage: false),
-                      getMessage(
-                          'Lorem ipsum dolor sit amet, nonummy euismod tincid',
-                          isRightMessage: true),
-                      getMessage('Lorem ipsum dolor sit amet, nonummy euismod',
-                          isRightMessage: false),
-                      getMessage('Lorem ipsum dolor sit amet',
-                          isRightMessage: true),
-                      getMessage(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                          isRightMessage: false),
-                    ],
-                  ),
-                ),
-              ),
-              getBottom(),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [
+              0,
+              0.35,
+              0.64,
+              0.82,
+              1,
+            ],
+            colors: [
+              Color(0x99F51C6D),
+              Color(0x99DB739B),
+              Color(0x99A8B3B8),
+              Color(0x9991DACB),
+              Color(0x998BF1D4),
             ],
           ),
         ),
-      ),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: TextButton(
-          onPressed: () {
-            Navigator.pop(context);
+        child: BlocConsumer<MessagerCubit, MessagerState>(
+          listener: (context, MessagerState state) {
+            if (state is MessagerSuccess && state.type == MessagerSuccessType.messageSent) {
+              _sendMessageController.text = '';
+            } else if (state is MessagerFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.error),
+              ));
+            }
           },
-          child: const Icon(
-            Icons.close,
-            color: Colors.white,
-            size: 40,
-          ),
-        ),
-        title: Row(
-          children: <Widget>[
-            Container(
-              width: 40,
-              height: 40,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"),
-                      fit: BoxFit.cover)),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
-                  "Tyler Nix",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+            builder: (context, MessagerState state) {
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              resizeToAvoidBottomInset: true,
+              extendBodyBehindAppBar: true,
+              appBar: AppBar(
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Assets.images.icons.close.svg(),
                 ),
-                const SizedBox(
-                  height: 3,
+                title: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 2.0),
+                      child: Text(
+                        "BOOKWORM",
+                        style: TextStyle(
+                          letterSpacing: 2,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontFamily: FontFamily.montserrat,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6.0),
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xFF8BE11C)),
+                          ),
+                        ),
+                        const Text(
+                          "Online",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 11,
+                            fontFamily: FontFamily.montserrat,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Text(
-                  "Active now",
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.4), fontSize: 14),
-                ),
-              ],
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Assets.images.icons.bot.svg(),
+                  ),
+                ],
+              ),
+              body: Stack(
+                children: [
+                  SizedBox(
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      reverse: true,
+                      child: Column(
+                        children: [
+                          SizedBox(height: AppBar().preferredSize.height),
+                          ...state.messages.map((message) => getMessage(
+                                message.message,
+                                isRightMessage:
+                                    message.user == userCubit.state.username,
+                              )),
+                          Container(),
+                          const SizedBox(
+                            height: 50,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: getBottom(),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          );
+        }),
       ),
     );
   }
@@ -119,7 +175,7 @@ class _DialogPageState extends State<DialogPage> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: isRightMessage ? Color(0xFFB57B94): Color(0xFF794E72),
+              color: isRightMessage ? Color(0xFFB57B94) : Color(0xFF794E72),
               borderRadius: BorderRadius.circular(10),
             ),
             child: ConstrainedBox(
@@ -152,12 +208,17 @@ class _DialogPageState extends State<DialogPage> {
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                Icons.add,
-                size: 35,
-                color: Color(0x99e22678),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.chips.name);
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(
+                  Icons.add,
+                  size: 35,
+                  color: Color(0x99e22678),
+                ),
               ),
             ),
             Expanded(
@@ -170,12 +231,14 @@ class _DialogPageState extends State<DialogPage> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                Icons.keyboard_voice,
-                size: 30,
-                color: Color(0x99e22678),
+            GestureDetector(
+              onTap: () {
+                messagerCubit.sendMessage(_sendMessageController.text,
+                    userCubit.state.username ?? '');
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Assets.images.icons.send.svg(),
               ),
             ),
           ],
