@@ -23,6 +23,9 @@ class $AssetsImagesIconsGen {
 
   /// File path: assets/images/icons/close.svg
   SvgGenImage get close => const SvgGenImage('assets/images/icons/close.svg');
+
+  /// File path: assets/images/icons/send.svg
+  SvgGenImage get send => const SvgGenImage('assets/images/icons/send.svg');
 }
 
 class Assets {
