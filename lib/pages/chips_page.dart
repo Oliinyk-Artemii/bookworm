@@ -101,270 +101,8 @@ class _ChipsPageState extends State<ChipsPage> {
                 ),
               ],
             ),
-            body: Stack(
+            body: Column(
               children: [
-                Container(
-                  width: 170,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 139),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-
-                  ),
-                ),
-                Container(
-                  width: 123,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 216, top: 139),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFF794E72),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 133,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 191),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 160,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 178, top: 191),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 151,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 243),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFF794E72),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 141,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 197, top: 243),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 133,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 296),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 160,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 178, top: 296),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 170,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 348.5),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 123,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 216, top: 348.5),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFF794E72),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 133,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 400.9),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFF794E72),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum",
-                        style: TextStyle(color: Colors.white,),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 160,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 178, top: 400.9),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 160,
-                  height: 32,
-                  margin: EdgeInsets.only(left: 36, top: 453.2),
-                  decoration: BoxDecoration(
-                    color:  Color(0xFFB57B94),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width / 1.5,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Lorem ipsum dolor",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: double.infinity,
                   child: SingleChildScrollView(
@@ -373,11 +111,15 @@ class _ChipsPageState extends State<ChipsPage> {
                     child: Column(
                       children: [
                         SizedBox(height: AppBar().preferredSize.height),
-
                       ],
                     ),
                   ),
                 ),
+                getChip("ewrfgjihr", true),
+                getChip("ewrfgjihr", false),
+                getChip("ewrfgjihr", true),
+                getChip("ewrfgjihr", false),
+                getChip("ewrfgjihr", true),
               ],
             ),
           ),
@@ -385,5 +127,27 @@ class _ChipsPageState extends State<ChipsPage> {
       ),
     );
 
+  }
+  Widget getChip(String name, bool isSelected){
+    return Container(
+      width: 160,
+      height: 32,
+      margin: EdgeInsets.only(left: 36, top: 453.2),
+      decoration: BoxDecoration(
+        color:  isSelected ?  Color(0xFF794E72) : Color(0xFFB57B94),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width / 1.5,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(name,
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }
