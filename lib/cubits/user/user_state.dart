@@ -24,7 +24,7 @@ class UserState {
 class UserSuccess extends UserState {
   final UserSuccessType type;
 
-  const UserSuccess(this.type);
+  const UserSuccess(this.type, String username) : super(username: username);
 }
 
 enum UserSuccessType { logined }

@@ -5,6 +5,7 @@ import 'package:untitled/cubits/messager/messager_cubit.dart';
 import 'package:untitled/cubits/user/user_cubit.dart';
 import 'package:untitled/project_router.dart';
 import 'package:untitled/utils/di_utils.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

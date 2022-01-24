@@ -11,7 +11,7 @@ class UserService {
     if (messagesData.data() != null) {
       Map<String, dynamic> data = messagesData.data() as Map<String, dynamic>;
 
-      return (data['dialogs'] as List? ?? [])
+      return (data['messages'] as List? ?? [])
           .map((e) => Message.fromJson(e))
           .toList();
     } else {

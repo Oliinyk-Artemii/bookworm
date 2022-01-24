@@ -24,6 +24,13 @@ class _UsernamePageState extends State<UsernamePage> {
     userCubit = DIUtils.get<UserCubit>();
   }
 
+
+  @override
+  void dispose() {
+    userCubit.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

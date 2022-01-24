@@ -29,7 +29,10 @@ class MessagerState {
 class MessagerSuccess extends MessagerState {
   final MessagerSuccessType type;
 
-  const MessagerSuccess(this.type);
+  const MessagerSuccess(
+    this.type, {
+    required List<Message> messages,
+  }) : super(messages: messages);
 }
 
 enum MessagerSuccessType { messageSent }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/cubits/messager/messager_cubit.dart';
 import 'package:untitled/cubits/messager/messager_state.dart';
 import 'package:untitled/cubits/user/user_cubit.dart';
+import 'package:untitled/cubits/user/user_state.dart';
 import 'package:untitled/utils/di_utils.dart';
 import 'package:untitled/utils/values/gen/assets.gen.dart';
 import 'package:untitled/utils/values/gen/fonts.gen.dart';
@@ -18,18 +19,14 @@ class DialogPage extends StatefulWidget {
 
 class _DialogPageState extends State<DialogPage> {
   TextEditingController _sendMessageController = TextEditingController();
-  late UserCubit _userCubit;
+  late UserCubit userCubit;
+  late MessagerCubit messagerCubit;
 
   @override
   void initState() {
     super.initState();
-    _userCubit = DIUtils.get<UserCubit>();
-  }
-
-  @override
-  void dispose() {
-    _userCubit.close();
-    super.dispose();
+    userCubit = DIUtils.get<UserCubit>();
+    messagerCubit = DIUtils.get<MessagerCubit>();
   }
 
   @override
@@ -57,7 +54,16 @@ class _DialogPageState extends State<DialogPage> {
             ],
           ),
         ),
-        child: BlocBuilder<MessagerCubit, MessagerState>(
+        child: BlocConsumer<MessagerCubit, MessagerState>(
+          listener: (context, MessagerState state) {
+            if (state is MessagerSuccess && state.type == MessagerSuccessType.messageSent) {
+              _sendMessageController.text = '';
+            } else if (state is MessagerFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(state.error),
+              ));
+            }
+          },
             builder: (context, MessagerState state) {
           return SafeArea(
             child: Scaffold(
@@ -135,7 +141,7 @@ class _DialogPageState extends State<DialogPage> {
                           ...state.messages.map((message) => getMessage(
                                 message.message,
                                 isRightMessage:
-                                    message.user == _userCubit.state.username,
+                                    message.user == userCubit.state.username,
                               )),
                           Container(),
                           const SizedBox(
@@ -225,12 +231,14 @@ class _DialogPageState extends State<DialogPage> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                Icons.keyboard_voice,
-                size: 30,
-                color: Color(0x99e22678),
+            GestureDetector(
+              onTap: () {
+                messagerCubit.sendMessage(_sendMessageController.text,
+                    userCubit.state.username ?? '');
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Assets.images.icons.send.svg(),
               ),
             ),
           ],

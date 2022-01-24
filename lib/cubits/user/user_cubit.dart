@@ -20,7 +20,7 @@ class UserCubit extends Cubit<UserState> {
       emit(state.copyWith(isLoading: true));
       final List<Message> messages = await _userService.login(username);
       _messagerCubit.updateMessages(messages);
-      emit(const UserSuccess(UserSuccessType.logined));
+      emit(UserSuccess(UserSuccessType.logined, username));
     } catch (e) {
       emit(UserFailure(e.toString()));
     }
