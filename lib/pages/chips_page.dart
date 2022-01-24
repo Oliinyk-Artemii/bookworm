@@ -101,40 +101,43 @@ class _ChipsPageState extends State<ChipsPage> {
                 ),
               ],
             ),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: double.infinity,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    reverse: true,
-                    child: Column(
-                      children: [
-                        SizedBox(height: AppBar().preferredSize.height),
-                      ],
-                    ),
+            body: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              reverse: true,
+              child: Column(
+                children: [
+                  // Container(),
+                  SizedBox(height: AppBar().preferredSize.height),
+                  Wrap(
+                    children: [
+                      getChip('Lorem ipsum ', true),
+                      getChip('Lorem ipsum', false),
+                      getChip('Lorem', false),
+                      getChip('Lorem ipsum ', false),
+                      getChip('Lorem ipsum', true),
+                      getChip('Lorem', false),
+                      getChip('Lorem ipsum ', false),
+                      getChip('Lorem ipsum', true),
+                      getChip('Lorem', false),
+                      getChip('Lorem ipsum ', false),
+                      getChip('Lorem ipsum', false),
+                      getChip('Lorem', true),
+                    ],
                   ),
-                ),
-                getChip("ewrfgjihr", true),
-                getChip("ewrfgjihr", false),
-                getChip("ewrfgjihr", true),
-                getChip("ewrfgjihr", false),
-                getChip("ewrfgjihr", true),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
-
   }
-  Widget getChip(String name, bool isSelected){
+
+  Widget getChip(String name, bool isSelected) {
     return Container(
-      width: 160,
-      height: 32,
-      margin: EdgeInsets.only(left: 36, top: 453.2),
+      margin: EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color:  isSelected ?  Color(0xFF794E72) : Color(0xFFB57B94),
+        color: isSelected ? Color(0xFF794E72) : Color(0xFFB57B94),
         borderRadius: BorderRadius.circular(10),
       ),
       child: ConstrainedBox(
@@ -143,7 +146,8 @@ class _ChipsPageState extends State<ChipsPage> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(name,
+          child: Text(
+            name,
             style: TextStyle(color: Colors.white),
           ),
         ),

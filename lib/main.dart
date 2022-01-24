@@ -42,7 +42,7 @@ class BookwarmApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: Routes.dialog.name,
+        initialRoute: Routes.chips.name,
         onGenerateRoute: ProjectRouter.generateRoute,
       ),
     );
