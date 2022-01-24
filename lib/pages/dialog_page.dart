@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/project_router.dart';
 import 'package:untitled/utils/values/gen/assets.gen.dart';
 import 'package:untitled/utils/values/gen/fonts.gen.dart';
 
@@ -201,12 +202,17 @@ class _DialogPageState extends State<DialogPage> {
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Icon(
-                Icons.add,
-                size: 35,
-                color: Color(0x99e22678),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.chips.name);
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Icon(
+                  Icons.add,
+                  size: 35,
+                  color: Color(0x99e22678),
+                ),
               ),
             ),
             Expanded(
