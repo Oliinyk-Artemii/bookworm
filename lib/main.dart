@@ -10,7 +10,15 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Firebase.initializeApp();
+  Firebase.initializeApp(
+      name: 'Bookworm',
+      options: const FirebaseOptions(
+        appId: '1:785501196505:android:5fc10b5715f1462b25aec8',
+        projectId: 'bookworm-272ea',
+        messagingSenderId: '785501196505',
+        apiKey:
+            '	AAAAtuOFENk:APA91bF26R-qLH1e-6k7-2mhq-vWMOuRR2y7znkQB6tZDWGfhgaoFue1e3QPzhOKB34b4wKJXZy7YvJvbSft-0nuVdUQc0KPlULvkb4VJe8QHbwwjzwrxxGkvfgqg0TyakUU-eXltSLp',
+      ));
 
   DIUtils.injectDependencies();
 
